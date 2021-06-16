@@ -16,11 +16,12 @@ public class Battleship {
     // static Player1Phase {
     public static void main(String[] args) {
         System.out.println("Player 1, its your turn");
-        createMatrix(map);
+        /*createMatrix(map);
         printMatrix(map);
-
-        ShootingPhase shot = new ShootingPhase(map);
-        shot.shotHits(4,4);
+        createMatrix(test);
+        printMatrix(test);
+        createMatrix(test2);
+        printMatrix(test2);*/
 
         System.out.println();
         Scanner input = new Scanner(System.in);
@@ -66,5 +67,4 @@ public class Battleship {
         }
         System.out.println();
     }
-
 }
