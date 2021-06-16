@@ -6,38 +6,82 @@ import java.util.Scanner;
 public class Battleship {
     //placement phase method goes here
     public static char[][] map = new char[5][5];
-    public static char[][] test = new char[8][4];
-    public static char[][] test2 = new char[10][10];
+    public static int[] rowNames = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    public static char[] coloumNames = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
 
-    public static char InputChar(String message) {
-        //message method that asks for an input and then returns it
-        return 'a';
+    public static void UserInput() {
+        String inputCharacters;
+        boolean inputIsValid = false;
+        do{
+
+            inputCharacters =  inputStr("Adja meg a kívánt pozíciókat! (pl A-1)");
+            if(inputCharacters.length() == 4 || inputCharacters.length() == 3) {
+                if(inputCharacters.substring(1,2).equals("-")) {
+                    if(isNum(inputCharacters.substring(0,1))) {
+                        if(!isNum(inputCharacters.substring(2,3))) {
+                            inputIsValid = true;
+
+                        }
+                    }
+                }
+            }
+        }while(!inputIsValid);
+
+
+
+
+
+
+
+
     }
-    // static Player1Phase {
+
+
+
+
+
+
+
+    public static String inputStr(String question) {
+        System.out.println(question);
+        Scanner keyboardInput = new Scanner(System.in);
+        return keyboardInput.nextLine();
+
+        // static Player1Phase {
+
+    }
+
+
+
+
+
+
+
+
     public static void main(String[] args) {
-        System.out.println("Player 1, its your turn");
+
         createMatrix(map);
         printMatrix(map);
 
         ShootingPhase shot = new ShootingPhase(map);
-        shot.shotHits(4,4);
+        shot.shotHits(4, 4);
 
-        System.out.println();
-        Scanner input = new Scanner(System.in);
-        System.out.println("Set the row, coloumn and  direction");
-        String RowInput = input.nextLine();
-        String ColoumnInput = input.nextLine();
+        UserInput();
 
-        String DirectionInput = input.nextLine();
-
-        int ColoumnInputNumber = Integer.parseInt(ColoumnInput);
 
         //if the choice is not correct, display an error message saying that the choices arent correct
         //If user wants to place two ships next to each other then error message is displayed//
 
 
-    }
 
+
+
+
+
+        }
+       //System.out.println(" Next player's placement phase);
+
+    //System.out.println("Next player placement phase...");
     public static void createMatrix(char[][] board){
         for(int i = 0; i < board.length; i ++){
             for(int j = 0; j < board[i].length; j ++) {
@@ -48,8 +92,7 @@ public class Battleship {
 
     public static void printMatrix(char[][] board){
         String backSpaces = "  ";
-        int[] rowNames = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        char[] coloumNames = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
+
         for(int i = 0; i < board[0].length; i ++) {
             if(i == 0) System.out.print("   "+rowNames[i] + backSpaces);
             else System.out.print(+rowNames[i] + backSpaces);
@@ -66,5 +109,21 @@ public class Battleship {
         }
         System.out.println();
     }
+    public static boolean isNum(String s){
+        boolean stat;
+        if(s != null)
+        {
+            try {
+                Float.parseFloat(s);
+                stat = true;
+            }
+            catch (NumberFormatException nfe) {
+                stat = false;
+            }
+        }
+        else return true;
+        return !stat;
+    }
 
 }
+
