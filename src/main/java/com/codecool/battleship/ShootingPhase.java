@@ -1,11 +1,13 @@
 package com.codecool.battleship;
 
+import java.util.Scanner;
+
 public class ShootingPhase {
     private char[][] map;
 
     public ShootingPhase(char[][] elements){
         map = elements;
-        shotHits(4,4);
+        shotInput();
     }
 
     public static void main(String[] args) {
@@ -21,43 +23,82 @@ public class ShootingPhase {
 
     }
 
-    public void ShowBoard(int player){
-    /*
-        if (player == 2){
-            player = 1;
-            while (player < 4){
-            for (int r = 0; r < map[player].length; r++) {
-                System.out.println();
-                for (int c = 0; c < map[player][r].length; c++) {
-                    System.out.print(map[player][r][c] + " ");
-                    }
-                }
-                System.out.println();
-                player += 2;
-            }
+    public void changePlayer(){
+        shotInput();
+    }
+
+    public void changeInputToRowColumn(String input){
+        int rowInt = 0;
+        String row = String.valueOf(input.charAt(0));
+        String column = String.valueOf(input.charAt(1));
+        switch (row){
+            case "A":
+                rowInt = 0;
+                break;
+
+            case "B":
+                rowInt = 1;
+                break;
+
+            case "C":
+                rowInt = 2;
+                break;
+
+            case "D":
+                rowInt = 3;
+                break;
+
+            case "E":
+                rowInt = 4;
+                break;
+
+            default:
+                System.out.println("Első koordináta nem A-E!");
+                shotInput();
         }
-
-     */
-
-            for (int r = 0; r < map.length; r++) {
-                System.out.println();
-                for (int c = 0; c < map[r].length; c++) {
-                    System.out.print(map[r][c] + " ");
-                }
+        Integer col = isNumber(column);
+        if (col != null) {
+            col -= 1;
+            shotHits(rowInt, col);
+        } else {
+            System.out.println("Második koordináta nem egy szám 1-5!");
+            shotInput();
             }
+
+    }
+
+    public static Integer isNumber(String str) {
+        try {
+            return Integer.parseInt(str);
+        } catch (NumberFormatException ex) {
+            return null;
         }
+    }
 
-
+    public void shotInput(){
+        System.out.println("Add meg a koordinátákat A-E 1-5 (pl.: A3): ");
+        Scanner input = new Scanner(System.in);
+        changeInputToRowColumn(input.nextLine());
+    }
 
     public void shotHits(int row, int column){
 
         System.out.println();
-
-        if(map[row][column] == 'X'){
-            System.out.println("talált");
+        if (row > 4 || column > 4){
+            System.out.println("Invalid input!");
+            shotInput();
+            return;
         }
-        //ShowBoard(2);
+        if(map[row][column] == 'X'){
+            System.out.println("Talált!");
+        }
+        else {
+            System.out.println("Nem talált!");
+        }
+
         Battleship board = new Battleship();
         board.printMatrix(map);
+
+        changePlayer();
     }
 }

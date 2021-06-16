@@ -17,10 +17,10 @@ public class Battleship {
     public static void main(String[] args) {
         System.out.println("Player 1, its your turn");
         createMatrix(map);
-        printMatrix(map);
+        //printMatrix(map);
 
         ShootingPhase shot = new ShootingPhase(map);
-        shot.shotHits(4,4);
+        shot.shotInput();
 
         System.out.println();
         Scanner input = new Scanner(System.in);
