@@ -3,14 +3,14 @@ package com.codecool.battleship;
 import java.util.Scanner;
 
 public class PlacementPhase {
-
+/*
     public static char[][] map = new char[][]{
             {'0', '0', '0', '0', '0'},
             {'0', '0', '0', '0', '0'},
             {'0', '0', 'X', '0', '0'},
             {'0', '0', '0', '0', '0'},
             {'0', '0', '0', '0', '0'}
-    };
+    };*/
 
     public static void main(String[] args) {
 
@@ -32,13 +32,13 @@ public class PlacementPhase {
             // add meg egy egyes hajót koordinátáit
             // int[] coordinates = getShipCoordinates();
             // larakjuk a táblába a hajót
-            if (canPlace(map,coordinateX, coordinateY)){
-                map[coordinateX][coordinateY] = 'X';
+            if (canPlace(Battleship.map1,coordinateX, coordinateY)){
+                Battleship.map1[coordinateX][coordinateY] = 'X';
             } else {
-                System.out.println("Ide nem tudom letenni.");
+                System.out.println("Ide nem tudom letenni. ");
             };
 
-            printMatrix(map);
+            printMatrix(Battleship.map1);
         }
         while (!inputStr("Folytassuk? I/N: ").equals("n")) ;
 
@@ -48,50 +48,75 @@ public class PlacementPhase {
 
     // ellenőrizzük, lerakhatjuk-e a táblára a hajót
     //
-    public static boolean canPlace (char[][] actualBoard,int x, int y){
+    public static boolean hasNeighbour(char[][] actualBoard, int x, int y){
         boolean canPlace = false;
-        boolean onTheRight;
-        boolean onTheLeft;
-        boolean onTheBottom;
-        boolean onTheTop;
 
-        try {
-            onTheRight = actualBoard[x+1][y] == '0';
-
-        } catch (Exception e) {
-            onTheRight = true;
-        }
-        try {
-            onTheLeft = actualBoard[x-1][y] == '0';
-
-        } catch (Exception e) {
-            onTheLeft = true;
-        }
-        try {
-            onTheTop = actualBoard[x][y-1] == '0';
-
-        } catch (Exception e) {
-            onTheTop = true;
-        }
-        try {
-            onTheBottom = actualBoard[x][y+1] == '0';
-
-        } catch (Exception e) {
-            onTheBottom = true;
-        }
-        if (actualBoard[x][y] == '0') {
-            if ( onTheLeft &&
-                    onTheRight &&
-                    onTheTop &&
-                    onTheBottom) {
+            if (directionOfShip(actualBoard, x, y) == '0') {
                 canPlace = true;
             } else {
                 canPlace = false;
             }
+
+        return canPlace;
+    }
+
+    public static boolean isThereAnything (char[][] actualBoard,int x, int y){
+        boolean canPlace = false;
+        x -= 1;
+        y -= 1;
+        if (actualBoard[x][y] == '0') {
+            canPlace = true;
         }
         // actualBoard[x][y] = "X";
         return canPlace;
     }
+
+    public static boolean canPlace(char[][] actualBoard, int x, int y) {
+        boolean canPlace;
+
+        canPlace = ( isThereAnything(actualBoard,x, y) && hasNeighbour(actualBoard,x,y));
+        return canPlace;
+}
+public static char directionOfShip(char[][] actualBoard, int x, int y) {
+    x -= 1;
+    y -= 1;
+        char directionOfShip = '0';
+    boolean onTheRight;
+    boolean onTheLeft;
+    boolean onTheBottom;
+    boolean onTheTop;
+
+        try {
+        onTheBottom = actualBoard[x+1][y] != '0';
+    } catch (Exception e) {
+        onTheBottom = false;
+    }
+
+    try {
+        onTheTop = actualBoard[x-1][y] != '0';
+    } catch (Exception e) {
+        onTheTop = false;
+    }
+
+    try {
+        onTheLeft = actualBoard[x][y-1] != '0';
+    } catch (Exception e) {
+        onTheLeft = false;
+    }
+
+    try {
+        onTheRight = actualBoard[x][y+1] != '0';
+
+    } catch (Exception e) {
+        onTheRight = false;
+    }
+    if (onTheTop) directionOfShip = 'N';
+    if (onTheBottom) directionOfShip = 'S';
+    if (onTheLeft) directionOfShip = 'W';
+    if (onTheRight) directionOfShip = 'E';
+return directionOfShip;
+}
+
 
 
 
