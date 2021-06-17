@@ -1,4 +1,3 @@
-/*
 package com.codecool.battleship;
 
 public class GameOver {
@@ -21,7 +20,6 @@ public class GameOver {
         }
     }
 }
-*/
 
 
     /*public static void end(){
