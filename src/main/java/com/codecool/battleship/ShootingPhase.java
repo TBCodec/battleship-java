@@ -36,16 +36,15 @@ public class ShootingPhase {
                 player += 2;
             }
         }
-
      */
 
-            for (int r = 0; r < map.length; r++) {
-                System.out.println();
-                for (int c = 0; c < map[r].length; c++) {
-                    System.out.print(map[r][c] + " ");
-                }
+        for (int r = 0; r < map.length; r++) {
+            System.out.println();
+            for (int c = 0; c < map[r].length; c++) {
+                System.out.print(map[r][c] + " ");
             }
         }
+    }
 
 
 

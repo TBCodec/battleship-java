@@ -4,20 +4,18 @@ import java.util.Scanner;
 
 public class PlacementPhase {
 
-    public static char[][] map = new char[][]{
+    /*public static char[][] map = new char[][]{
             {'0', '0', '0', '0', '0'},
             {'0', '0', '0', '0', '0'},
             {'0', '0', 'X', '0', '0'},
             {'0', '0', '0', '0', '0'},
             {'0', '0', '0', '0', '0'}
-    };
+    };*/
 
     public static void main(String[] args) {
 
-    int coordinateX = 2;
-    int coordinateY = 3;
-
-
+        int coordinateX = 2;
+        int coordinateY = 3;
 
         do {
             coordinateX = Integer.parseInt(inputStr("x: "))-1;
@@ -32,13 +30,14 @@ public class PlacementPhase {
             // add meg egy egyes hajót koordinátáit
             // int[] coordinates = getShipCoordinates();
             // larakjuk a táblába a hajót
-            if (canPlace(map,coordinateX, coordinateY)){
-                map[coordinateX][coordinateY] = 'X';
+
+            if (canPlace(Battleship.map1,coordinateX, coordinateY)){
+                Battleship.map1[coordinateX][coordinateY] = 'X';
             } else {
                 System.out.println("Ide nem tudom letenni.");
             };
 
-            printMatrix(map);
+            printMatrix(Battleship.map1);
         }
         while (!inputStr("Folytassuk? I/N: ").equals("n")) ;
 
@@ -49,6 +48,8 @@ public class PlacementPhase {
     // ellenőrizzük, lerakhatjuk-e a táblára a hajót
     //
     public static boolean canPlace (char[][] actualBoard,int x, int y){
+        x -= 1;
+        y -= 1;
         boolean canPlace = false;
         boolean onTheRight;
         boolean onTheLeft;
@@ -90,6 +91,7 @@ public class PlacementPhase {
             }
         }
         // actualBoard[x][y] = "X";
+        System.out.println(canPlace);
         return canPlace;
     }
 
@@ -134,39 +136,23 @@ public class PlacementPhase {
 }
 
  /*
-
-
-
-
     public static String validateInput(String input, String type, int size) {
-
         ;
         return keyboardInput.nextLine();
     }
-
-
-
-
     public static void Placement(String[][] board){
-
         // bekérjük a hajó helyét
         // validáljuk a hajó helyét
         //lerakjuk a hajót
-
-
     }
-
-
     public static int getValidNumber(char s) {
         boolean numeric = true;
         int num;
         if (s.equals("")) {
             num = 999;
         } else {
-
             try {
                 num = int.parseInt(s);
-
             } catch (NumberFormatException e) {
                 numeric = false;
             }
@@ -174,13 +160,9 @@ public class PlacementPhase {
                 return num;
             } else {
                 num = rowIndex(s);
-
             }
-
         }
         }
-
-
         public static int rowIndex(char str); {
             char[] validRowLetters = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
             for (int i = 0; i < validRowLetters.length; i++) {
@@ -189,7 +171,6 @@ public class PlacementPhase {
                 }
             }
             return i;
-
         }
         public static char checkHit(char board[][],int row, int col) {
             char shoot;
@@ -197,25 +178,15 @@ public class PlacementPhase {
                 case "0": board[][] = "M";
                 case "X": if (board(checkNeighbour(row,col))  == "H") {     // ha NaN, NaN jön vissza, akkor nincs szomszéd,
                     board[row][col] = "S";                                  // ha koordináták jönnek vissza akkor azt is ellenőrizni kell
-
                 }else{board[row][col] = "H"}
-
                 }
-
                     shoot = M;
                 case "M": shoot = M;
                 case "S": shoot = M;
-
-
             }
         }
-
         public static int checkNeighbour[][] (char board[][], int row, int col) {
         //
-
-
         }
-
     }
-
 */

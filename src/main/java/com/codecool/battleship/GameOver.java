@@ -13,19 +13,15 @@ public class GameOver {
                 while ("X".equals(map[i])) {
 
 
-                    }
                 }
             }
-
         }
+        return true;
     }
 }
 
 
     /*public static void end(){
-
        /* if(){
-
         }
     }*/
-
