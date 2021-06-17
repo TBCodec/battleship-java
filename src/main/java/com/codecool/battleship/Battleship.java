@@ -17,9 +17,14 @@ public class Battleship {
     public static void main(String[] args) {
         createMatrix(map1);
         createMatrix(map2);
+        createMatrix(shotMap1);
+        createMatrix(shotMap2);
         UserInput();
         map1[x-1][y-1] = 'X';
         printMatrix(map1);
+        UserInput();
+        ShootingPhase sh = new ShootingPhase(map1, shotMap1);
+        sh.shotHits(x,y);
         UserInput();
         map2[x-1][y-1] = 'X';
         printMatrix(map2);
@@ -121,8 +126,8 @@ public class Battleship {
         //System.out.println(inputCharacters.substring(2,3));
         x = charValidator(inputCharacters.substring(0,1));
         y = numberValidator(Integer.parseInt(inputCharacters.substring(2,3)));
-        PlacementPhase pp = new PlacementPhase();
-        pp.canPlace(map1,x,y);
+//        PlacementPhase pp = new PlacementPhase();
+//        pp.canPlace(map1,x,y);
     }
 
     public static String inputStr(String question) {
