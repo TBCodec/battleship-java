@@ -10,23 +10,26 @@ public class ShootingPhase {
     }
 
     public void shotHits(int row, int column) {
+        PlacementPhase pp = new PlacementPhase();
+        char direction = pp.directionOfShip(map, row, column);
         row -= 1;
         column -= 1;
         System.out.println();
 
         if (map[row][column] == 'X') {
-
-            if (isThereHCharacter(row, column)) {
-                shotMap[row][column] = 'H';
-
-            } else {
+            if (direction == '0'){
                 shotMap[row][column] = 'S';
+                System.out.println("You've sunk a ship!");
             }
-            System.out.println("Talált");
+
+            else shotMap[row][column] = 'H';
+
+            System.out.println("You've hit a ship!");
             map[row][column] = '0';
         }
+
         else {
-            System.out.println("Nem talált");
+            System.out.println("You've missed!");
             shotMap[row][column] = 'M';
         }
     }

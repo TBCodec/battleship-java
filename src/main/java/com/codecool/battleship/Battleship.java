@@ -13,25 +13,61 @@ public class Battleship {
     public static String[] coloumNames = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     public static int x;
     public static int y;
+    public static int player;
 
     public static void main(String[] args) {
         createMatrix(map1);
         createMatrix(map2);
         createMatrix(shotMap1);
         createMatrix(shotMap2);
-        UserInput();
-        map1[x-1][y-1] = 'X';
-        printMatrix(map1);
-        UserInput();
-        ShootingPhase sh = new ShootingPhase(map1, shotMap1);
-        sh.shotHits(x,y);
-        System.out.println("Ez a találati map:");
-        printMatrix(shotMap1);
-        System.out.println("Ez a hajó map:");
-        printMatrix(map1);
-        UserInput();
-        map2[x-1][y-1] = 'X';
-        printMatrix(map2);
+
+        // hajó elhelyezése
+        player = 1;
+        System.out.println("1-es játékos adja meg a 2-es hajó helyzetét");
+        for (int i = 0; i < 2; i++) {
+            placeShip(player);
+        }
+        player = 2;
+        System.out.println("2-es játékos adja meg a 2-es hajó helyzetét");
+        for (int i = 0; i < 2; i++) {
+            placeShip(player);
+        }
+
+        // lövések
+        while (true) {
+            player = 1;
+            System.out.println("1-es játékos adja meg a lövés helyét");
+            UserInput();
+            ShootingPhase shP1 = new ShootingPhase(map2, shotMap1);
+            shP1.shotHits(x, y);
+
+            System.out.println("Ez a találati map player 1:");
+            printMatrix(shotMap1);
+            //System.out.println("Ez a hajó map player 1:");
+            //printMatrix(map1);
+
+            System.out.println("Ez a találati map player 2:");
+            printMatrix(shotMap2);
+            //System.out.println("Ez a hajó map player 2:");
+            //printMatrix(map2);
+
+            player = 2;
+            System.out.println("2-es játékos adja meg a lövés helyét");
+            UserInput();
+            ShootingPhase shP2 = new ShootingPhase(map1, shotMap2);
+            shP2.shotHits(x, y);
+
+            System.out.println("Ez a találati map player 1:");
+            printMatrix(shotMap1);
+            //System.out.println("Ez a hajó map player 1:");
+            //printMatrix(map1);
+
+            System.out.println("Ez a találati map player 2:");
+            printMatrix(shotMap2);
+            //System.out.println("Ez a hajó map player 2:");
+            //printMatrix(map2);
+        }
+
     }
 
     public static int numberValidator(int num){
@@ -45,13 +81,25 @@ public class Battleship {
 
         if(!state){
             result = -1;
-            System.out.println(result);
+            //System.out.println(result);
             UserInput();
         } else {
             result = num;
-            System.out.println(result);
+            //System.out.println(result);
         }
         return result;
+    }
+
+    public static void placeShip(int player){
+        UserInput();
+        if (player == 1){
+            map1[x-1][y-1] = 'X';
+            printMatrix(map1);
+        }
+        else{
+            map2[x-1][y-1] = 'X';
+            printMatrix(map2);
+        }
     }
 
     public static int charValidator(String str){
@@ -65,7 +113,7 @@ public class Battleship {
         }
         if(!state){
             result = -1;
-            System.out.println(result);
+            //System.out.println(result);
             UserInput();
             return result;
         } else {
@@ -101,7 +149,7 @@ public class Battleship {
                     result = 10;
                     break;
             }
-            System.out.println(result);
+            //System.out.println(result);
             return result;
         }
     }
@@ -130,8 +178,8 @@ public class Battleship {
         //System.out.println(inputCharacters.substring(2,3));
         x = charValidator(inputCharacters.substring(0,1));
         y = numberValidator(Integer.parseInt(inputCharacters.substring(2,3)));
-//        PlacementPhase pp = new PlacementPhase();
-//        pp.canPlace(map1,x,y);
+        PlacementPhase pp = new PlacementPhase();
+        pp.canPlace(map1,x,y);
     }
 
     public static String inputStr(String question) {

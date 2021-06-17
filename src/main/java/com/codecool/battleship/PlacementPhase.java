@@ -12,6 +12,7 @@ public class PlacementPhase {
             {'0', '0', '0', '0', '0'}
     };*/
 
+    /*
     public static void main(String[] args) {
 
     int coordinateX = 2;
@@ -45,10 +46,11 @@ public class PlacementPhase {
         //
 
     }
+    */
 
     // ellenőrizzük, lerakhatjuk-e a táblára a hajót
     //
-    public static boolean hasNeighbour(char[][] actualBoard, int x, int y){
+    public boolean hasNeighbour(char[][] actualBoard, int x, int y){
         boolean canPlace = false;
 
             if (directionOfShip(actualBoard, x, y) == '0') {
@@ -71,13 +73,13 @@ public class PlacementPhase {
         return canPlace;
     }
 
-    public static boolean canPlace(char[][] actualBoard, int x, int y) {
+    public boolean canPlace(char[][] actualBoard, int x, int y) {
         boolean canPlace;
 
         canPlace = ( isThereAnything(actualBoard,x, y) && hasNeighbour(actualBoard,x,y));
         return canPlace;
 }
-public static char directionOfShip(char[][] actualBoard, int x, int y) {
+public char directionOfShip(char[][] actualBoard, int x, int y) {
     x -= 1;
     y -= 1;
         char directionOfShip = '0';
