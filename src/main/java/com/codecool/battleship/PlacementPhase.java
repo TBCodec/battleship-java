@@ -40,7 +40,7 @@ public class PlacementPhase {
 
             printMatrix(map);
         }
-        while (inputStr("Folytassuk? I/N: ").equals("i")) ;
+        while (!inputStr("Folytassuk? I/N: ").equals("n")) ;
 
         //
 
@@ -50,11 +50,40 @@ public class PlacementPhase {
     //
     public static boolean canPlace (char[][] actualBoard,int x, int y){
         boolean canPlace = false;
+        boolean onTheRight;
+        boolean onTheLeft;
+        boolean onTheBottom;
+        boolean onTheTop;
+
+        try {
+            onTheRight = actualBoard[x+1][y] == '0';
+
+        } catch (Exception e) {
+            onTheRight = true;
+        }
+        try {
+            onTheLeft = actualBoard[x-1][y] == '0';
+
+        } catch (Exception e) {
+            onTheLeft = true;
+        }
+        try {
+            onTheTop = actualBoard[x][y-1] == '0';
+
+        } catch (Exception e) {
+            onTheTop = true;
+        }
+        try {
+            onTheBottom = actualBoard[x][y+1] == '0';
+
+        } catch (Exception e) {
+            onTheBottom = true;
+        }
         if (actualBoard[x][y] == '0') {
-            if (actualBoard[x+1][y] == '0' &&
-                    actualBoard[x-1][y] == '0' &&
-                    actualBoard[x][y+1] == '0' &&
-                    actualBoard[x][y-1] == '0') {
+            if ( onTheLeft &&
+                    onTheRight &&
+                    onTheTop &&
+                    onTheBottom) {
                 canPlace = true;
             } else {
                 canPlace = false;
