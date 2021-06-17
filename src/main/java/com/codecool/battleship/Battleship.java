@@ -25,6 +25,10 @@ public class Battleship {
         UserInput();
         ShootingPhase sh = new ShootingPhase(map1, shotMap1);
         sh.shotHits(x,y);
+        System.out.println("Ez a találati map:");
+        printMatrix(shotMap1);
+        System.out.println("Ez a hajó map:");
+        printMatrix(map1);
         UserInput();
         map2[x-1][y-1] = 'X';
         printMatrix(map2);

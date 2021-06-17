@@ -7,20 +7,6 @@ public class ShootingPhase {
     public ShootingPhase(char[][] map, char[][] shotMap) {
         this.map = map;
         this.shotMap = shotMap;
-        //shotHits(4,4);
-    }
-
-    public static void main(String[] args) {
-        char[][] map = new char[][]{
-                {'0', '0', '0', '0', '0'},
-                {'0', '0', '0', '0', '0'},
-                {'0', '0', '0', '0', '0'},
-                {'0', '0', '0', '0', '0'},
-                {'0', '0', '0', '0', 'X'}
-        };
-
-        ShootingPhase shootingPhase = new ShootingPhase(map, map);
-
     }
 
     public void shotHits(int row, int column) {
@@ -32,22 +18,17 @@ public class ShootingPhase {
 
             if (isThereHCharacter(row, column)) {
                 shotMap[row][column] = 'H';
+
             } else {
                 shotMap[row][column] = 'S';
             }
             System.out.println("Talált");
-
-            //shotMap[row][column] = 'H';
+            map[row][column] = '0';
         }
-        //ShowBoard(2);
         else {
             System.out.println("Nem talált");
             shotMap[row][column] = 'M';
         }
-
-        Battleship board = new Battleship();
-        board.printMatrix(shotMap);
-
     }
 
 
