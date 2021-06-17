@@ -13,6 +13,8 @@ public class Battleship {
     public static String[] coloumNames = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
     public static int x;
     public static int y;
+    public static int x2;
+    public static int y2;
     public static int player;
 
     public static void main(String[] args) {
@@ -20,18 +22,30 @@ public class Battleship {
         createMatrix(map2);
         createMatrix(shotMap1);
         createMatrix(shotMap2);
+        PlacementPhase pp = new PlacementPhase();
 
         // hajó elhelyezése
         player = 1;
+        System.out.println("1-es játékos adja meg a 1-es hajó helyzetét");
+        placeShip(player);
         System.out.println("1-es játékos adja meg a 2-es hajó helyzetét");
-        for (int i = 0; i < 2; i++) {
-            placeShip(player);
-        }
+        UserInput();
+        x2 = x;
+        y2 = y;
+        UserInput();
+        pp.placeDoubleShip(map1, x, y, x2, y2);
+        printMatrix(map1);
+
         player = 2;
+        System.out.println("2-es játékos adja meg a 1-es hajó helyzetét");
+        placeShip(player);
         System.out.println("2-es játékos adja meg a 2-es hajó helyzetét");
-        for (int i = 0; i < 2; i++) {
-            placeShip(player);
-        }
+        UserInput();
+        x2 = x;
+        y2 = y;
+        UserInput();
+        pp.placeDoubleShip(map2, x, y, x2, y2);
+        printMatrix(map2);
 
         // lövések
         while (true) {
@@ -93,12 +107,23 @@ public class Battleship {
     public static void placeShip(int player){
         UserInput();
         if (player == 1){
+            if (map1[x-1][y-1] == 'X'){
+                System.out.println("Ide már raktál!");
+                placeShip(player);
+            }
+            else {
             map1[x-1][y-1] = 'X';
             printMatrix(map1);
+            }
         }
         else{
-            map2[x-1][y-1] = 'X';
-            printMatrix(map2);
+            if (map2[x-1][y-1] == 'X'){
+                System.out.println("Ide már raktál!");
+                placeShip(player);
+            }
+            else
+                map2[x-1][y-1] = 'X';
+                printMatrix(map2);
         }
     }
 

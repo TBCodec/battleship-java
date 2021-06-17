@@ -115,14 +115,14 @@ public class PlacementPhase {
         return done;
     }
 
-    public static boolean placeDoubleShip(char[][] actualBoard, int x1, int y1,int x2, int y2){
+    public boolean placeDoubleShip(char[][] actualBoard, int x1, int y1,int x2, int y2){
         // elhelyezünk egy dupla hajót a megfelelő helyre
         // ha nem lehet lerakni, false értékkel tér vissza
 
         boolean done;
         if (canPlace(actualBoard,x1,y1) && canPlace(actualBoard,x2,y2)) {
-            actualBoard[x1][y1] = 'X';
-            actualBoard[x2][y2] = 'X';
+            actualBoard[x1-1][y1-1] = 'X';
+            actualBoard[x2-1][y2-1] = 'X';
             done = true;
         } else done= false;
         return done;
