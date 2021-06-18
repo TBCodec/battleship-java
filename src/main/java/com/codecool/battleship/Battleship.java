@@ -16,6 +16,7 @@ public class Battleship {
     public static int x2;
     public static int y2;
     public static int player;
+    public static int winner = 0;
 
     public static void main(String[] args) {
         createMatrix(map1);
@@ -48,7 +49,7 @@ public class Battleship {
         printMatrix(map2);
 
         // lövések
-        while (true) {
+        while (winner < 1) {
             player = 1;
             System.out.println("1-es játékos adja meg a lövés helyét");
             UserInput();
@@ -64,6 +65,8 @@ public class Battleship {
             printMatrix(shotMap2);
             //System.out.println("Ez a hajó map player 2:");
             //printMatrix(map2);
+            GameOver gameover = new GameOver(map2);
+            if (gameover.GameWon()) winner = 1;
 
             player = 2;
             System.out.println("2-es játékos adja meg a lövés helyét");
@@ -80,7 +83,10 @@ public class Battleship {
             printMatrix(shotMap2);
             //System.out.println("Ez a hajó map player 2:");
             //printMatrix(map2);
+            GameOver gameover2 = new GameOver(map1);
+            if (gameover2.GameWon()) winner = 2;
         }
+        System.out.println("Player " + winner + " wins!");
 
     }
 
